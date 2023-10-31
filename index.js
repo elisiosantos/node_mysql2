@@ -14,6 +14,8 @@ app.use(express.urlencoded({
     extended:true
 }))
 
+
+
 app.use(express.json())
 
 app.post("/register/save", (request, response) =>{
@@ -39,8 +41,18 @@ app.get("/register", (request, response)=>{
 })
 
 
-app.get("/", (requisicao, resposta)=>{
-    resposta.render("home")
+app.get("/", (requisicao, response)=>{
+    const sql= 'SELECT * FROM books'
+
+    conn.query(sql,(error,data)=>{
+        if(error){
+            return console.log(error)
+        }
+
+        const books= data
+        console.log(books)
+        response.render("home", {books})
+    })
 })
 
 
