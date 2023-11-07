@@ -1,3 +1,4 @@
+const { response } = require("express")
 const express = require("express")
 const exphbs = require("express-handlebars")
 const mysql = require("mysql2")
@@ -40,6 +41,19 @@ app.get("/register", (request, response)=>{
     response.render("register")
 })
 
+app.get ("/book/:id", (request, response) =>{
+    const id = request.params.id
+
+    const sql=`SELECT * FROM books WHERE id=${id}`
+
+    conn.query(sql, (error, data)=>{
+        if(error){
+            return console.log(error)
+        }
+       const book = data[0]
+       response.render("book",{book})
+    })
+})
 
 app.get("/", (requisicao, response)=>{
     const sql= 'SELECT * FROM books'
