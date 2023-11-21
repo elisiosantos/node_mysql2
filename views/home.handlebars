@@ -10,6 +10,10 @@
         <div class="buttons">
         <a href="/book/{{this.id}}" class="mais">Ver Mais</a>
             <a href="/edit/{{this.id}}" class="editar">editar</a>
+            <form action="/delete/"  method="post">
+            <input type="hidden" name="id" value="{{this.id}}">
+                <button>Excluir</button>
+            </form>
             </div>
     </div>
     
